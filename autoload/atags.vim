@@ -9,9 +9,11 @@ let g:autoloaded_atags = 1
 let g:atags_had_errors=0
 
 function! atags#onGenerateErr(id, data, event)
-  let g:atags_had_errors=1
-  let msg = "❗ An error occurred generating ctags: " . join(a:data)
-  echom msg
+  if join(a:data) != ""
+    let g:atags_had_errors=1
+    let msg = "❗ An error occurred generating ctags: " . join(a:data)
+    echom msg
+  endif
 endfunction
 
 function! atags#onGenerateOut(id, data, event)
